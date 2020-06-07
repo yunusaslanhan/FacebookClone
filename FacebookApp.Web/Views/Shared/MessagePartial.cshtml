@@ -1,0 +1,36 @@
+﻿@model FacebookApp.Common.Dtos.UserPostDto
+@{
+    Layout = null;
+}
+
+
+@foreach (var item in Model.messageList)
+{
+
+    if (item.FromId == Model.loginUser.UserId)
+    {
+
+
+        <div class="post out">
+            <img class="avatar" alt="" src="/@Model.loginUser.Photo">
+            <div class="message">
+                <span class="arrow"></span>
+                <a href="#" class="name">@Model.loginUser.Name</a>
+                <span class="body">@item.MessageText </span>
+            </div>
+        </div>
+
+    }
+
+    else
+    {
+        <div class="post in">
+            <img class="avatar" alt="" src="/@Model.userDto.Photo">
+            <div class="message">
+                <span class="arrow"></span>
+                <a href="#" class="name">@Model.userDto.Name</a>
+                <span class="body">@item.MessageText </span>
+            </div>
+        </div>
+    }
+}

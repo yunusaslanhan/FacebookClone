@@ -1,0 +1,25 @@
+﻿@model FacebookApp.Common.Dtos.CommentDto
+@{
+    Layout = null;
+}
+
+@foreach (var item in Model.commentList)
+{
+            <li class="media">
+                <a class="pull-left" href="javascript:;">
+                    <img class="todo-userpic" src="/@item.CommentUserDto.Photo" width="27px" height="27px">
+                </a>
+                <div class="media-body todo-comment">
+
+                    <p class="todo-comment-head">
+                        <span class="todo-comment-username">@item.CommentUserDto.Name @item.CommentUserDto.LastName</span> &nbsp;
+                        
+                    </p>
+                    <p class="todo-text-color">
+                       @item.CommentText
+                        <br>
+                    </p>
+                </div>
+            </li>
+       
+}

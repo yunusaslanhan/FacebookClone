@@ -1,0 +1,597 @@
+﻿@model FacebookApp.Common.Dtos.UserPostDto
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<div class="container-fluid">
+
+    <div class="col-lg-3" style="background-color:#EEF1F5; margin-top:30px;">
+
+        <div class="profile-sidebar" style="background-color:#EEF1F5">
+            <!-- PORTLET MAIN -->
+            <div class="portlet light profile-sidebar-portlet">
+                <!-- SIDEBAR USERPIC -->
+                <div class="profile-userpic">
+                    <img src="/@Model.userDto.Photo" class="img-responsive" alt="">
+                </div>
+                <!-- END SIDEBAR USERPIC -->
+                <!-- SIDEBAR USER TITLE -->
+                <div class="profile-usertitle">
+                    <div style="margin-bottom:30px" class="profile-usertitle-name"><h4 style="text-align:center">@Model.userDto.Name @Model.userDto.LastName</h4> </div>
+                </div>
+                <!-- END SIDEBAR USER TITLE -->
+                <!-- SIDEBAR BUTTONS -->
+
+                <form id="friendForm">
+                    <input type="hidden" id="ToUserId" name="ToUserId" value="@Model.userDto.UserId" />
+                    <input type="hidden" id="ToUserFriendId" name="ToUserFriendId" value="@Model.userDto.UserId" />
+
+
+                    @if (Model.userDto.UserId != Model.loginUser.UserId)
+                    {
+                        <div class="profile-userbuttons">
+
+                            @if (ViewBag.IsFriend)
+                            {
+                                <button type="button" class="btn btn-circle green btn-sm" onclick="PostDeleteFriend()">Arkadaşlardan Çıkar</button>
+                                <button type="button" class="btn btn-circle red btn-sm">Mesaj</button>
+                            }
+                            else if (ViewBag.isRequestFriendsByOne)
+                            {
+                                <button type="button" class="btn btn-circle green btn-sm" onclick="PostConfirmationFriend()">İsteği Onayla</button>
+                                <button type="button" class="btn btn-circle red btn-sm" onclick="PostRejectionFriend()">İsteği Reddet</button>
+                            }
+                            else if (ViewBag.isRequestFriendsByMe)
+                            {
+                                <button type="button" class="btn btn-circle red btn-sm" onclick="PostDeleteConfirmation()">İsteği İptal Et</button>
+                            }
+
+                            else
+                            {
+                                <button type="button" class="btn btn-circle green btn-sm" onclick="PostAddFriend()">Arkadaş Ekle</button>
+                            }
+
+
+                        </div>
+                    }
+                </form>
+                <!-- END SIDEBAR BUTTONS -->
+                <!-- SIDEBAR MENU -->
+                <div class="profile-usermenu">
+                    @if (Model.userDto.UserId == Model.loginUser.UserId)
+                    {
+                        <ul class="nav">
+
+                            <li>
+                                <form method="post" action="/Profile/ShowFields" enctype="multipart/form-data">
+
+                                    <div class="fileinput fileinput-new" data-provides="fileinput" style="margin-left:10px">
+                                        <span class="btn green btn-file">
+                                            <span class="fileinput-new"> Profil Fotoğrafını Değiştir </span>
+                                            <span class="fileinput-exists"> Change </span>
+                                            <input type="hidden"><input type="file" name="pic">
+                                        </span>
+                                        <span class="fileinput-filename"> </span> &nbsp;
+                                        <a href="javascript:;" class="close fileinput-exists" data-dismiss="fileinput"> </a>
+                                    </div>
+
+                                    <button type="submit" class="btn red"> <i class="icon-settings"></i>Kaydet</button>
+                                </form>
+                            </li>
+
+                        </ul>
+                    }
+                </div>
+                <!-- END MENU -->
+            </div>
+            <!-- END PORTLET MAIN -->
+            <!-- PORTLET MAIN -->
+            <div class="portlet light" style="margin-top:8px">
+                <!-- STAT -->
+                <div class="row list-separated profile-stat">
+                    <div class="col-md-4 col-sm-4 col-xs-6">
+                        <div class="uppercase profile-stat-title"> @ViewBag.PostCount </div>
+                        <div class="uppercase profile-stat-text">Gönderi </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-6">
+                        <div class="uppercase profile-stat-title"> @ViewBag.FriendCount </div>
+                        <div class="uppercase profile-stat-text"> Arkadaşlar </div>
+                    </div>
+
+                </div>
+                <!-- END STAT -->
+                <div>
+
+                    <div class="margin-top-20 profile-desc-link">
+                        <i class="fa fa-globe"></i>
+                        <a href="http://www.keenthemes.com">@Model.userDto.Email</a>
+                    </div>
+
+
+                </div>
+            </div>
+            <!-- END PORTLET MAIN -->
+        </div>
+
+
+    </div>
+
+    <div class="col-lg-6" style="background-color:#EEF1F5; margin-top:30px;">
+
+        @*@if (Model.userDto.UserId == Model.loginUser.UserId)
+        {
+
+
+            <div class="portlet light portlet-fit ">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-paper-plane"></i>
+                        <span class="caption-subject bold font-green uppercase">Gönderi</span>
+                    </div>
+
+                </div>
+                <div class="portlet-body">
+
+
+                    <div class="form-group" align="right">
+                        <form id="postForm" enctype="multipart/form-data" action="/Profile/NewPostForAjax" method="post">
+                            <input type="hidden" id="UserId" name="UserId" value="@Model.userDto.UserId" />
+                            <textarea id="PostText" name="PostText" style="width:587px;height:150px; resize:none" class="form-control" rows="3" placeholder="Ne düşüyorsun?..."></textarea>
+
+
+                            <div class="fileinput fileinput-new" data-provides="fileinput" style="margin-top:20px;">
+                                <span class="btn green btn-file">
+                                    <span class="fileinput-new"> Dosya Yükle </span>
+                                    <span class="fileinput-exists"> Change </span>
+                                    <input type="hidden"><input type="file" name="...">
+                                </span>
+                                <span class="fileinput-filename"> </span> &nbsp;
+                                <a href="javascript:;" class="close fileinput-exists" data-dismiss="fileinput"> </a>
+                            </div>
+
+                            <button type="submit" class="btn blue">Paylaş</button>
+                        </form>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        }*@
+
+
+        <div class="portlet light portlet-fit">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-microphone font-green"></i>
+                    <span class="caption-subject bold font-green uppercase"> Zaman Tüneli</span>
+
+                </div>
+
+            </div>
+            <div class="portlet-body">
+                <div class="timeline">
+                    <!-- TIMELINE ITEM -->
+
+                    @foreach (var item in Model.postList)
+                    {
+
+
+
+                        @if (item.isShared)
+                        {
+                            @if (Model.userDto.UserId == Model.loginUser.UserId) { 
+                            <div class="timeline-item">
+                                <div class="timeline-badge">
+                                    <img class="timeline-badge-userpic" src="/@Model.userDto.Photo">
+                                </div>
+                                <div class="timeline-body">
+
+                                    <div class="timeline-body-arrow"> </div>
+                                    <div class="timeline-body-head">
+
+                                        <div class="timeline-body-head-caption">
+                                            <span class="timeline-body-title font-blue-madison">@Model.userDto.Name @Model.userDto.LastName</span>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="timeline-item">
+
+                                        <div class="timeline-body">
+                                            <div style="margin-left:-110px;" class="timeline-badge">
+                                                <img class="timeline-badge-userpic" src="/@item.Photo">
+                                            </div>
+                                            <div class="timeline-body-arrow"> </div>
+                                            <div class="timeline-body-head">
+                                                <div class="timeline-body-head-caption">
+                                                    <a href="javascript:;" class="timeline-body-title font-blue-madison">@item.Name @item.LastName</a>
+                                                    <span class="timeline-body-time font-grey-cascade">@item.CreateDate</span>
+
+                                                </div>
+
+
+                                            </div>
+                                            <br />
+
+
+                                            <div class="timeline-body-content">
+                                                @if (item.PostImage != null)
+                                                {
+                                                    <img src="~/images/PostImages/@item.PostImage" style="width:100%;height:100%;" />
+                                                }
+                                                <p style="margin-top:20px" class="font-grey-cascade">
+                                                    @item.PostText
+                                                </p>
+
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+
+                                </div>
+
+                            </div>
+                            }
+                        }
+                        else
+                        {
+
+
+
+
+                            <div class="timeline-item">
+                                <div class="timeline-badge">
+                                    <img class="timeline-badge-userpic" src="/@item.Photo">
+                                </div>
+                                <div class="timeline-body">
+                                    <div class="timeline-body-arrow"> </div>
+                                    <div class="timeline-body-head">
+                                        <div class="timeline-body-head-caption">
+                                            <a href="javascript:;" class="timeline-body-title font-blue-madison">@item.Name @item.LastName</a>
+                                            <span class="timeline-body-time font-grey-cascade">@item.CreateDate</span>
+
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="timeline-body-content">
+                                        @if (item.PostImage != null)
+                                        {
+                                            <img src="~/images/PostImages/@item.PostImage" style="width:100%;height:100%;" />
+                                        }
+                                        <p style="margin-top:20px" class="font-grey-cascade">
+                                            @item.PostText
+                                        </p>
+                                        <div class="col-md-4">
+                                            <form id="likeForm" action="/Profile/SetLike" method="post">
+                                                <input type="hidden" name="postId" id="postId" value="@item.PostId" />
+
+                                                @if (@item.isLike)
+                                                {
+                                                    <button style='margin-left:12%; border:none; background-color:transparent; color:red' type="submit"><i class='fa fa-thumbs-up'></i> Beğen </button>
+
+                                                }
+                                                else
+                                                {
+
+                                                    <button style='margin-left:12%; border:none; background-color:transparent; color:black' type="submit"><i class='fa fa-thumbs-o-up'></i> Beğen </button>
+
+                                                }
+                                            </form>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button style='margin-left:12%; border:none; background-color:transparent; color:black' onclick="GetToComment(@item.PostId)"><i class='fa fa-comments'></i> Yorum Yap </button>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button style='margin-left:12%; border:none; background-color:transparent; color:black' onclick="PostShared(@item.PostId)"><i class="fa fa-share"></i> Paylaş </button>
+                                        </div>
+
+                                        <br />
+                                        <br />
+
+                                        <ul id="dynamicContentComment"></ul>
+                                        <div class="chat-form">
+                                            <div class="input-cont">
+                                                <textarea style="height:34px;" class="form-control" type="text" id="CommentText_@item.PostId" name="CommentText"></textarea>
+                                            </div>
+                                            <div class="btn-cont">
+                                                <input class="hidden" id="PostId" name="PostId" value="@item.PostId" />
+                                                <span class="arrow"> </span>
+                                                <button type="button" class="btn blue icn-only" onclick="AddComment(@item.PostId)">
+                                                    <i class="fa fa-check icon-white"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+
+            </div>
+
+
+
+        </div>
+
+    </div>
+    <div class="col-lg-3">
+        @if (Model.userDto.UserId == Model.loginUser.UserId)
+        {
+            <div class="portlet light bordered" style="margin-top:30px">
+                <div class="portlet-title tabbable-line">
+                    <div class="caption">
+                        <i class=" icon-social-twitter font-dark hide"></i>
+                        <span class="caption-subject font-dark bold uppercase">Arkadaşlar</span>
+                    </div>
+
+                </div>
+                <div class="portlet-body">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab_actions_pending">
+                            <!-- BEGIN: Actions -->
+                            <div class="mt-actions">
+                                @foreach (var item in Model.userList)
+                                {
+
+                                    <div class="mt-action">
+                                        <div class="mt-action-img">
+                                            <img src="/@item.Photo" style="height:100%;width:100%">
+                                        </div>
+                                        <div class="mt-action-body">
+                                            <div class="mt-action-row">
+                                                <div class="mt-action-info">
+
+                                                    <div class="mt-action-details">
+                                                        <br />
+                                                        <a href="/Profile/Index/@item.UserId/"> <span class="mt-action-author">@item.Name @item.LastName</span></a>
+
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            <!-- END: Actions -->
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<script type="text/javascript">
+    function NewPost(x) {
+        var formData = $("#postForm").serialize();
+        debugger;
+
+        $.ajax({
+            url: "/Profile/NewPostForAjax",
+            method: "POST",
+            data: formData,
+            success: function (response) {
+                var $container = $("#ResponseContainer");
+
+                debugger;
+
+
+                if (response) {
+                    //$container.html($("#SuccessTemplate").html())
+                    //$("form")[0].reset();
+
+                    location.href = "/Profile/Index/" + x + "/";
+
+                } else {
+                    $container.html($("#ErrorTemplate").html())
+                }
+            }
+        });
+    }
+</script>
+
+<script type="text/javascript">
+    function PostAddFriend() {
+        var formData = $("#friendForm").serialize();
+        debugger;
+
+        $.ajax({
+            url: "/Profile/PostAddFriendForAjax",
+            method: "POST",
+            data: formData,
+            success: function (response) {
+                var $container = $("#ResponseContainer");
+
+                debugger;
+
+
+                if (response) {
+                    //$container.html($("#SuccessTemplate").html())
+                    //$("form")[0].reset();
+                    location.href = response;
+
+
+                } else {
+                    $container.html($("#ErrorTemplate").html())
+                }
+            }
+        });
+    }
+</script>
+<script type="text/javascript">
+    function PostDeleteFriend() {
+        var formData = $("#friendForm").serialize();
+        debugger;
+
+        $.ajax({
+            url: "/Profile/PostDeleteFriendForAjax",
+            method: "POST",
+            data: formData,
+            success: function (response) {
+                var $container = $("#ResponseContainer");
+
+                debugger;
+
+
+                if (response) {
+                    //$container.html($("#SuccessTemplate").html())
+                    //$("form")[0].reset();
+                    location.href = response;
+
+
+                } else {
+                    $container.html($("#ErrorTemplate").html())
+                }
+            }
+        });
+    }
+</script>
+<script type="text/javascript">
+    function PostConfirmationFriend() {
+        var formData = $("#friendForm").serialize();
+        debugger;
+
+        $.ajax({
+            url: "/Profile/PostConfirmationFriendForAjax",
+            method: "POST",
+            data: formData,
+            success: function (response) {
+                var $container = $("#ResponseContainer");
+
+                debugger;
+
+
+                if (response) {
+                    //$container.html($("#SuccessTemplate").html())
+                    //$("form")[0].reset();
+                    location.href = response;
+
+
+                } else {
+                    $container.html($("#ErrorTemplate").html())
+                }
+            }
+        });
+    }
+</script>
+<script type="text/javascript">
+    rejection
+    function PostRejectionFriend() {
+        var formData = $("#friendForm").serialize();
+        debugger;
+
+        $.ajax({
+            url: "/Profile/PostRejectionFriendForAjax",
+            method: "POST",
+            data: formData,
+            success: function (response) {
+                var $container = $("#ResponseContainer");
+
+                debugger;
+
+
+                if (response) {
+                    //$container.html($("#SuccessTemplate").html())
+                    //$("form")[0].reset();
+                    location.href = response;
+
+
+                } else {
+                    $container.html($("#ErrorTemplate").html())
+                }
+            }
+        });
+    }
+</script>
+
+<script type="text/javascript">
+    function PostDeleteConfirmation() {
+        var formData = $("#friendForm").serialize();
+        debugger;
+
+        $.ajax({
+            url: "/Profile/PostDeleteConfirmationForAjax",
+            method: "POST",
+            data: formData,
+            success: function (response) {
+                var $container = $("#ResponseContainer");
+
+                debugger;
+
+
+                if (response) {
+                    //$container.html($("#SuccessTemplate").html())
+                    //$("form")[0].reset();
+                    location.href = response;
+
+
+                } else {
+                    $container.html($("#ErrorTemplate").html())
+                }
+            }
+        });
+    }
+</script>
+
+<script type="text/javascript">
+    function PostShared(postId) {
+        var userPostId = postId
+        $.ajax({
+            url: "/Profile/PostSharedForAjax",
+            data: { 'PostId': userPostId },
+            method: "POST",
+            success: function (response) {
+                location.href = response;
+                alert("Gönderi Paylaşıldı.");
+            }
+        });
+    }
+</script>
+
+
+<script type="text/javascript">
+    function GetToComment(postId) {
+        var postIdData = postId;
+        $.ajax({
+            url: "/Profile/GetComment",
+            data: { 'PostId': postIdData },
+            method: "POST",
+            success: function (response) {
+                $("#dynamicContentComment").html(response);
+            }
+        });
+    }
+</script>
+
+<script type="text/javascript">
+    function AddComment(postIdData) {
+        var postId = postIdData;
+        var commentText = $("#CommentText_" + postId).val();
+
+        $.ajax({
+            url: "/Profile/AddCommentForAjax",
+            data: { postId: postId, commentText: commentText },
+            method: "POST",
+            success: function (response) {
+
+                $("#dynamicContentComment").html(response);
+            }
+        });
+    }
+</script>

@@ -1,0 +1,16 @@
+C:\Users\Yunus\source\repos\FacebookApp\FacebookApp.Business\bin\Debug\netcoreapp2.1\FacebookApp.Business.deps.json
+C:\Users\Yunus\source\repos\FacebookApp\FacebookApp.Business\bin\Debug\netcoreapp2.1\FacebookApp.Business.dll
+C:\Users\Yunus\source\repos\FacebookApp\FacebookApp.Business\obj\Debug\netcoreapp2.1\FacebookApp.Business.csprojAssemblyReference.cache
+C:\Users\Yunus\source\repos\FacebookApp\FacebookApp.Business\obj\Debug\netcoreapp2.1\FacebookApp.Business.csproj.CoreCompileInputs.cache
+C:\Users\Yunus\source\repos\FacebookApp\FacebookApp.Business\obj\Debug\netcoreapp2.1\FacebookApp.Business.AssemblyInfoInputs.cache
+C:\Users\Yunus\source\repos\FacebookApp\FacebookApp.Business\obj\Debug\netcoreapp2.1\FacebookApp.Business.AssemblyInfo.cs
+C:\Users\Yunus\source\repos\FacebookApp\FacebookApp.Business\bin\Debug\netcoreapp2.1\FacebookApp.Business.pdb
+C:\Users\Yunus\source\repos\FacebookApp\FacebookApp.Business\bin\Debug\netcoreapp2.1\FacebookApp.Domain.dll
+C:\Users\Yunus\source\repos\FacebookApp\FacebookApp.Business\bin\Debug\netcoreapp2.1\FacebookApp.Domain.pdb
+C:\Users\Yunus\source\repos\FacebookApp\FacebookApp.Business\obj\Debug\netcoreapp2.1\FacebookApp.Business.csproj.CopyComplete
+C:\Users\Yunus\source\repos\FacebookApp\FacebookApp.Business\obj\Debug\netcoreapp2.1\FacebookApp.Business.dll
+C:\Users\Yunus\source\repos\FacebookApp\FacebookApp.Business\obj\Debug\netcoreapp2.1\FacebookApp.Business.pdb
+C:\Users\Yunus\source\repos\FacebookApp\FacebookApp.Business\bin\Debug\netcoreapp2.1\FacebookApp.Common.dll
+C:\Users\Yunus\source\repos\FacebookApp\FacebookApp.Business\bin\Debug\netcoreapp2.1\Microsoft.AspNetCore.Http.Abstractions.dll
+C:\Users\Yunus\source\repos\FacebookApp\FacebookApp.Business\bin\Debug\netcoreapp2.1\FacebookApp.Common.pdb
+C:\Users\Yunus\source\repos\FacebookApp\FacebookApp.Business\bin\Debug\netcoreapp2.1\Microsoft.AspNetCore.Http.Abstractions.xml

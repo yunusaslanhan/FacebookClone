@@ -1,0 +1,9 @@
+C:\Users\Yunus\source\repos\FacebookApp\FacebookApp.Domain\bin\Debug\netcoreapp2.1\FacebookApp.Domain.deps.json
+C:\Users\Yunus\source\repos\FacebookApp\FacebookApp.Domain\bin\Debug\netcoreapp2.1\FacebookApp.Domain.dll
+C:\Users\Yunus\source\repos\FacebookApp\FacebookApp.Domain\bin\Debug\netcoreapp2.1\FacebookApp.Domain.pdb
+C:\Users\Yunus\source\repos\FacebookApp\FacebookApp.Domain\obj\Debug\netcoreapp2.1\FacebookApp.Domain.csprojAssemblyReference.cache
+C:\Users\Yunus\source\repos\FacebookApp\FacebookApp.Domain\obj\Debug\netcoreapp2.1\FacebookApp.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Yunus\source\repos\FacebookApp\FacebookApp.Domain\obj\Debug\netcoreapp2.1\FacebookApp.Domain.AssemblyInfoInputs.cache
+C:\Users\Yunus\source\repos\FacebookApp\FacebookApp.Domain\obj\Debug\netcoreapp2.1\FacebookApp.Domain.AssemblyInfo.cs
+C:\Users\Yunus\source\repos\FacebookApp\FacebookApp.Domain\obj\Debug\netcoreapp2.1\FacebookApp.Domain.dll
+C:\Users\Yunus\source\repos\FacebookApp\FacebookApp.Domain\obj\Debug\netcoreapp2.1\FacebookApp.Domain.pdb

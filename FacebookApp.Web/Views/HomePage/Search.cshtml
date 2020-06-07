@@ -1,0 +1,53 @@
+﻿@model List<FacebookApp.Common.Dtos.UserDto>
+@{
+    ViewData["Title"] = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<br />
+<br />
+<br />
+
+<div class="container">
+
+    <div class="col-lg-3" style="margin-top:50px;">
+
+    </div>
+    <div class="col-lg-6" style="margin-top:50px;">
+
+
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-comments"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Kişiler </font></font>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="table-scrollable">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                          
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr class="warning">
+                                    <td><a href="/Profile?Id=@item.UserId"><img src="/@item.Photo" style="width:25px;height:25px"/></a></td>
+                                    <td><a href="/Profile?Id=@item.UserId">@item.Name @item.LastName</a></td>
+                                </tr>
+                            }
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+       
+
+
+    </div>
+
+    <div class="col-lg-3" style="margin-top:50px;">
+
+    </div>
+</div><!-- centerl meta -->

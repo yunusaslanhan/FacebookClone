@@ -1,0 +1,271 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<!--
+Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.7
+Version: 4.7.5
+Author: KeenThemes
+Website: http://www.keenthemes.com/
+Contact: support@keenthemes.com
+Follow: www.twitter.com/keenthemes
+Dribbble: www.dribbble.com/keenthemes
+Like: www.facebook.com/keenthemes
+Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
+Renew Support: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
+License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
+-->
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+
+<head>
+    <meta charset="utf-8" />
+    <title>Facebook</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="Preview page of Metronic Admin Theme #1 for " name="description" />
+    <meta content="" name="author" />
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+    <link href="~/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <link href="~/assets/global/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!-- BEGIN THEME GLOBAL STYLES -->
+    <link href="~/assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
+    <link href="~/assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+    <!-- END THEME GLOBAL STYLES -->
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    <link href="~/assets/pages/css/login-2.min.css" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL STYLES -->
+    <!-- BEGIN THEME LAYOUT STYLES -->
+    <!-- END THEME LAYOUT STYLES -->
+    <link rel="shortcut icon" href="favicon.ico" />
+</head>
+<!-- END HEAD -->
+
+<body class=" login">
+    <!-- BEGIN LOGO -->
+    <div class="logo">
+        <a href="index.html">
+            <img src="~/assets/pages/img/login/FacebookLogo.png" style="height: 50px;" alt="" />
+        </a>
+    </div>
+    <!-- END LOGO -->
+    <!-- BEGIN LOGIN -->
+    <div class="content">
+        <!-- BEGIN LOGIN FORM -->
+        <form class="login-form" id="girisform" method="post">
+            <div class="form-title">
+                <span class="form-title">Hoşgeldiniz.</span>
+                <span class="form-subtitle">Lütfen Giriş Yapınız.</span>
+            </div>
+            <div class="alert alert-danger display-hide">
+                <button class="close" data-close="alert"></button>
+                <span> Enter any username and password. </span>
+            </div>
+            <div class="form-group">
+                <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+                <label class="control-label visible-ie8 visible-ie9">Username</label>
+                <input class="form-control form-control-solid placeholder-no-fix" type="text" placeholder="E-mail" id="Email" name="Email" />
+            </div>
+            <div class="form-group">
+                <label class="control-label visible-ie8 visible-ie9">Password</label>
+                <input class="form-control form-control-solid placeholder-no-fix" type="password" placeholder="Şifre" id="Password" name="Password" />
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn blue btn-block uppercase" onclick="PostLoginUser()">Giriş Yap</button>
+            </div>
+            <div class="form-actions">
+
+            </div>
+
+            <div class="create-account">
+                <p>
+                    <a href="javascript:;" class="btn-primary btn" id="register-btn">Hesap Oluştur</a>
+                </p>
+            </div>
+        </form>
+        <!-- END LOGIN FORM -->
+        <!-- BEGIN FORGOT PASSWORD FORM -->
+        <form class="forget-form" action="index.html" method="post">
+            <div class="form-title">
+                <span class="form-title">Forget Password ?</span>
+                <span class="form-subtitle">Enter your e-mail to reset it.</span>
+            </div>
+            <div class="form-group">
+                <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Email" name="email" />
+            </div>
+            <div class="form-actions">
+                <button type="button" id="back-btn" class="btn btn-default">Back</button>
+                <button type="submit" class="btn btn-primary uppercase pull-right">Submit</button>
+            </div>
+        </form>
+        <!-- END FORGOT PASSWORD FORM -->
+        <!-- BEGIN REGISTRATION FORM -->
+        <div id="ResponseContainer">
+            @if (ViewBag.IsPost ?? false)
+            {
+                if (ViewBag.Result)
+                {
+                    <div class="alert alert-success">
+                        <strong>Success!</strong> Indicates a successful or positive action.
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-danger">
+                        <strong>Error!</strong>
+                    </div>
+                }
+            }
+        </div>
+        <form id="kayitform" action="/Home/PostNewEmployee" class="register-form" method="post">
+            <div class="form-title">
+                <span class="form-title">Kayıt Ol</span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label visible-ie8 visible-ie9">Full Name</label>
+                <input class="form-control placeholder-no-fix" type="text" placeholder="Ad" id="Name" name="Name" />
+            </div>
+            <div class="form-group">
+                <label class="control-label visible-ie8 visible-ie9">Full Name</label>
+                <input class="form-control placeholder-no-fix" type="text" placeholder="Soyad" id="LastName" name="LastName" />
+            </div>
+            <div class="form-group">
+                <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+                <label class="control-label visible-ie8 visible-ie9">Email</label>
+                <input class="form-control placeholder-no-fix" type="text" placeholder="Email" id="Email" name="Email" />
+            </div>
+
+            <div class="form-group">
+                <label class="control-label visible-ie8 visible-ie9">Password</label>
+                <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="Password" id="Password" name="Password" />
+            </div>
+
+            <div class="form-actions">
+                <button type="button" id="register-back-btn" class="btn red">Geri</button>
+                <button type="button" id="register-submit-btn" onclick="PostNewEmployee()" class="btn blue uppercase pull-right">Kayıt Ol</button>
+            </div>
+        </form>
+
+        <script type="text/template" id="SuccessTemplate">
+            <div class="alert alert-success">
+                <strong>Kayıt Başarılı!!!</strong>
+            </div>
+        </script>
+        <script type="text/template" id="ErrorTemplate">
+            <div class="alert alert-danger">
+                <strong>Kayıt Başarısız!!!</strong>
+            </div>
+        </script>
+
+        <script type="text/template" id="TrueLoginTemplate">
+            <div class="alert alert-success">
+                <strong>Giriş Başarılı!!!</strong>
+            </div>
+        </script>
+        <script type="text/template" id="FalseLoginTemplate">
+            <div class="alert alert-danger">
+                <strong>Giriş Başarısız!!!</strong>
+            </div>
+        </script>
+
+        <!-- END REGISTRATION FORM -->
+    </div>
+   
+    <!-- END LOGIN -->
+    <!--[if lt IE 9]>
+    <script src="~/assets/global/plugins/respond.min.js"></script>
+    <script src="~/assets/global/plugins/excanvas.min.js"></script>
+    <script src="~/assets/global/plugins/ie8.fix.min.js"></script>
+    <![endif]-->
+    <!-- BEGIN CORE PLUGINS -->
+    <script src="~/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/js.cookie.min.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+    <!-- END CORE PLUGINS -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <script src="~/assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!-- BEGIN THEME GLOBAL SCRIPTS -->
+    <script src="~/assets/global/scripts/app.min.js" type="text/javascript"></script>
+    <!-- END THEME GLOBAL SCRIPTS -->
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="~/assets/pages/scripts/login.min.js" type="text/javascript"></script>
+    <!-- END PAGE LEVEL SCRIPTS -->
+    <!-- BEGIN THEME LAYOUT SCRIPTS -->
+    <!-- END THEME LAYOUT SCRIPTS -->
+    <script>
+        $(document).ready(function () {
+            $('#clickmewow').click(function () {
+                $('#radio1003').attr('checked', 'checked');
+            });
+        })
+    </script>
+
+
+    <script type="text/javascript">
+        function PostNewEmployee() {
+            var formData = $("#kayitform").serialize();
+            $.ajax({
+                url: "/Home/PostNewEmployeeForAjax",
+                method: "POST",
+                data: formData,
+                success: function (response) {
+                    var $container = $("#ResponseContainer");
+                    if (response) {
+                        $container.html($("#SuccessTemplate").html())
+                        //$("form")[0].reset();
+                    } else {
+                        $container.html($("#ErrorTemplate").html())
+                    }
+                }
+            });
+        }
+    </script>
+
+
+    <script type="text/javascript">
+        function PostLoginUser() {
+            var formData = $("#girisform").serialize();
+            $.ajax({
+                url: "/Home/PostLoginUserForAjax",
+                method: "POST",
+                data: formData,
+                success: function (response) {
+                    var $container = $("#ResponseContainer");
+                    if (response) {
+
+                        window.location = ("HomePage/Index"); ///ana sayfaya yönlendireceğin zaman bunu aç alltaki iki satırı sil   /home/index
+                        $container.html($("#TrueLoginTemplate").html())
+                        $("form")[0].reset();
+                    } else {
+                        $container.html($("#FalseLoginTemplate").html())
+                        $("form")[0].reset();
+                    }
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>
